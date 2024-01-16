@@ -1,6 +1,3 @@
-//Viral Science www.viralsciencecreativity.com www.youtube.com/c/viralscience
-//Arduino Bluetooth App Control Mecanum Wheel Robot
-
 #include <AFMotor.h>   //Download and Install AFMotor.h Library
 
 AF_DCMotor motor1(1); //Front Left Wheel
