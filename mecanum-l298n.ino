@@ -1,197 +1,76 @@
-//MECANUM WHEELS ROBOT
-//ROBOT LK
-
-#define IN_11  22        // L298N #1 in 4 motor Front Right
-#define IN_12  24        // L298N #1 in 3 motor Front Right
-#define IN_13  26        // L298N #1 in 2 motor Front Left
-#define IN_14  28        // L298N #1 in 1 motor Front Left
-
-#define IN_21  30        // L298N #2 in 4 motor Back Left
-#define IN_22  32       // L298N #2 in 3 motor Back Left
-#define IN_23  34       // L298N #2 in 2 motor Back Right
-#define IN_24  36      // L298N #2 in 1 motor Back Right
-
-//ROBOT LK
-
-
-int command;             //Int to store app command state.
-boolean state = 1;
-
-
-void stopRobot() {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, LOW);
-
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, LOW);
-  
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, LOW);
-  
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, LOW);
-  
-}
-void back() {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, HIGH);
-
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, HIGH);
- 
-  digitalWrite(IN_24, HIGH);
-  digitalWrite(IN_23, LOW);
-  
-  digitalWrite(IN_22, HIGH);
-  digitalWrite(IN_21, LOW);
- 
-}
-void forward () {
-  digitalWrite(IN_11, HIGH);
-  digitalWrite(IN_12, LOW);
-
-  digitalWrite(IN_13, HIGH);
-  digitalWrite(IN_14, LOW);
-  
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, HIGH);
- 
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, HIGH);
- 
-}
-void left() {
-  digitalWrite(IN_11, HIGH);
-  digitalWrite(IN_12, LOW);
-  
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, HIGH);
-  
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, HIGH);
-  
-  digitalWrite(IN_22, HIGH);
-  digitalWrite(IN_21, LOW);
-  
-}
-void right() {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, HIGH);
-  
-  digitalWrite(IN_13, HIGH);
-  digitalWrite(IN_14, LOW);
-
-  digitalWrite(IN_24, HIGH);
-  digitalWrite(IN_23, LOW);
- 
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, HIGH);
-  
-}
-void superleft () {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, HIGH);
-  
-  digitalWrite(IN_13, HIGH);
-  digitalWrite(IN_14, LOW);
-
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, HIGH);
-
-  digitalWrite(IN_22, HIGH);
-  digitalWrite(IN_21, LOW);
- 
-}
-void superright () {
-  digitalWrite(IN_11, HIGH);
-  digitalWrite(IN_12, LOW);
- 
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, HIGH);
- 
-  digitalWrite(IN_24, HIGH);
-  digitalWrite(IN_23, LOW);
- 
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, HIGH);
-
-}
-void forwardright () {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, LOW);
-
-  digitalWrite(IN_13, HIGH);
-  digitalWrite(IN_14, LOW);
-
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, LOW);
-
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, HIGH);
-  
-}
-void forwardleft () {
-  digitalWrite(IN_11, HIGH);
-  digitalWrite(IN_12, LOW);
-  
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, LOW);
-  
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, HIGH);
- 
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, LOW);
-  
-}
-void backleft () {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, HIGH);
-
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, LOW);
- 
-  digitalWrite(IN_24, HIGH);
-  digitalWrite(IN_23, LOW);
-  
-  digitalWrite(IN_22, LOW);
-  digitalWrite(IN_21, LOW);
-  
-}
-void backright () {
-  digitalWrite(IN_11, LOW);
-  digitalWrite(IN_12, LOW);
-  
-  digitalWrite(IN_13, LOW);
-  digitalWrite(IN_14, HIGH);
-  
-  digitalWrite(IN_24, LOW);
-  digitalWrite(IN_23, LOW);
-  
-  digitalWrite(IN_22, HIGH);
-  digitalWrite(IN_21, LOW);
-  
-}
+// Motor A
+int enA = 38;
+int inA1 = 22;
+int inA2 = 24;
+// Motor B
+int enB = 40;
+int inB1 = 26;
+int inB2 = 28;
+// Motor C
+int enC = 42;
+int inC1 = 30;
+int inC2 = 32;
+// Motor D
+int enD = 44;
+int inD1 = 34;
+int inD2 = 36;
 void setup() {
-  Serial.begin (9600);
-  
-  pinMode(IN_11, OUTPUT);
-  pinMode(IN_12, OUTPUT);
-  pinMode(IN_13, OUTPUT);
-  pinMode(IN_14, OUTPUT);
-
-  pinMode(IN_21, OUTPUT);
-  pinMode(IN_22, OUTPUT);
-  pinMode(IN_23, OUTPUT);
-  pinMode(IN_24, OUTPUT);
-
-   
+	// Set all the motor control pins to outputs
+	pinMode(enA, OUTPUT);
+	pinMode(enB, OUTPUT);
+  pinMode(enC, OUTPUT);
+	pinMode(enD, OUTPUT);
+	pinMode(inA1, OUTPUT);
+	pinMode(inA2, OUTPUT);
+	pinMode(inB1, OUTPUT);
+	pinMode(inB2, OUTPUT);
+  pinMode(inC1, OUTPUT);
+	pinMode(inC2, OUTPUT);
+	pinMode(inD1, OUTPUT);
+	pinMode(inD2, OUTPUT);
+	
+	// Turn off motors - Initial state
+	digitalWrite(inA1, LOW);
+	digitalWrite(inA2, LOW);
+	digitalWrite(inB1, LOW);
+	digitalWrite(inB2, LOW);
+  digitalWrite(inC1, LOW);
+	digitalWrite(inC2, LOW);
+	digitalWrite(inD1, LOW);
+	digitalWrite(inD2, LOW);
 }
-//ROBOT LK
+
+void forward () {
+	digitalWrite(inA1, HIGH);
+	digitalWrite(inA2, LOW);
+	digitalWrite(inB1, HIGH);
+	digitalWrite(inB2, LOW);
+  digitalWrite(inC1, HIGH);
+	digitalWrite(inC2, LOW);
+	digitalWrite(inD1, HIGH);
+	digitalWrite(inD2, LOW);
+  analogWrite(enA, 150);
+  analogWrite(enB, 150);
+  analogWrite(enC, 150);
+  analogWrite(enD, 150);
+}
+void stop () {
+	digitalWrite(inA1, LOW);
+	digitalWrite(inA2, LOW);
+	digitalWrite(inB1, LOW);
+	digitalWrite(inB2, LOW);
+  digitalWrite(inC1, LOW);
+	digitalWrite(inC2, LOW);
+	digitalWrite(inD1, LOW);
+	digitalWrite(inD2, LOW);
+  analogWrite(enA, 150);
+  analogWrite(enB, 150);
+  analogWrite(enC, 150);
+  analogWrite(enD, 150);
+}
 
 void loop() {
-
-  stopRobot();
-  delay(2000);
+  stop();
+  delay(1000);
 }
-//robot lk
+
